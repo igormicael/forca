@@ -2,9 +2,76 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Jogo da forca</title>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+  <link href="https://unpkg.com/vuetify@1.5.2/dist/vuetify.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/axios@0.18.0/dist/axios.js"></script>
+  <script src="https://unpkg.com/vue@2.6.7/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.min.js"></script>
+  <script src="https://unpkg.com/vuetify@1.5.2/dist/vuetify.min.js"></script>
+
 </head>
 <body>
 
+	<v-app id="app">
+	    <v-toolbar dark app color="primary">
+	      <v-toolbar-title >{{titulo}}</v-toolbar-title>
+          
+          <v-btn color="primary" @click="iniciarJogo"	>
+          	Iniciar
+          </v-btn>
+	    </v-toolbar>
+	    <v-content>
+          <v-alert
+	        :value="retorno.mensagem == null ? false : true"
+	        type="warning" >
+	        {{ retorno.mensagem }}
+	      </v-alert>
+      <v-container>
+      	<v-layout row>
+      		<v-flex xs6>
+	        	<v-text-field type="text" label="Palpite:"
+	              v-model="retorno.letra" />
+	        </v-flex>
+	        <v-flex xs6>
+            	<v-text-field type="text" disabled label="Numero Tentativas:"
+	              v-model="retorno.numeroTentativas" />
+	        </v-flex>
+        </v-layout>
+        <v-layout row>
+	        <v-flex xs12>
+	        	<div>
+	        	<ul id="example-1">
+				  <li v-for="letra in retorno.palavraNaTela">
+				    {{ letra }}
+				  </li>
+				</ul>
+	        	
+	        	</div>
+	        </v-flex>
+        </v-layout>
+        
+        <v-layout row>
+	        <v-flex xs12>
+            	 <v-btn color="primary" @click="darPalpite"	>
+		         	Dar palpite
+		         </v-btn>
+	        </v-flex>
+        </v-layout>
+      </v-container>
+	    </v-content>
+	    <v-footer dark app color="primary" class="pa-2">
+	      IgorMicael&copy;
+	    </v-footer>
+	  </v-app>
+
+<script src="js/forcaService.js"></script>
+<script src="js/forca.js"></script>
 </body>
 </html>
