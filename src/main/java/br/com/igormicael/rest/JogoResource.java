@@ -22,8 +22,6 @@ public class JogoResource {
 
 	private List<String> listaPalavras;
 
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response iniciar() {
@@ -88,10 +86,19 @@ public class JogoResource {
 		
 		Boolean errou = true;
 		
-		for (Integer i = 0; i < retorno.getPalavraEscolhida().length; i++) {
+		String letra = retorno.getLetra();
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < letra.length(); i++) {
+			char charAt = letra.charAt(i);
+			sb.setLength(0);
+			sb.append(charAt);
 			
-			if(retorno.getPalavraEscolhida()[i].equalsIgnoreCase(retorno.getLetra())) {
-				indiceLetra.add( new IndiceLetra(i, retorno.getLetra()));
+			for (Integer j = 0; j < retorno.getPalavraEscolhida().length; j++) {
+				
+				if(retorno.getPalavraEscolhida()[j].equalsIgnoreCase(sb.toString())) {
+					indiceLetra.add( new IndiceLetra(j, sb.toString()));
+				}
 			}
 		}
 		
